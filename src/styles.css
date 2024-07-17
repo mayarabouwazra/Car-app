@@ -1,0 +1,37 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+.custom-modal {
+    background-color: #f8f9fa; /* Change to your desired color */
+    padding: 20px;
+  }
+  
+  .modal-header {
+    background-color: #343a40; /* Change to your desired color */
+    color: white;
+  }
+  
+  .modal-title {
+    font-weight: bold;
+  }
+  .modal-body {
+    font-size: 40px;
+    font-weight: bold;
+
+    color: #b85656; 
+    line-height: 2;
+    text-align: center; 
+  }
+
+
+  .custom-search-input {
+    border: 1px solid #ccc; 
+    padding: 5px 10px;
+    border-radius: 5px; 
+    font-size: 14px; }
+  
+  .custom-search-label {
+    font-weight: bold; 
+    margin-right: 10px; 
+  }

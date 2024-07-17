@@ -1,0 +1,131 @@
+
+
+
+
+<div class="container mt-4">
+
+    
+  <div align="right" >
+    <button class=" bn632-hover bn26 " (click)="toggleColumn()" >View...</button>
+
+    
+
+  </div>
+
+    
+    <div class="form-group mt-4">
+      <label for="searchInput" class="custom-search-label">Search:</label>
+      <input type="text" class="form-control custom-search-input" id="searchInput" [(ngModel)]="searchTerm" (input)="applySearch($event)">
+    </div>
+
+    
+
+
+    <table class="table table-bordered table-striped mt-4 custom-table" sortable="both">
+      <thead>
+        <tr>
+            <th (click)="onSort('displayValue')">
+                Vehicle
+                <span class="float-right">
+                  <i *ngIf="sortColumn === 'displayValue' && sortOrder === 'asc'" class="bi bi-sort-up "></i>
+                  <i *ngIf="sortColumn === 'displayValue' && sortOrder === 'desc'" class="bi bi-sort-down"></i>
+                </span>
+              </th>
+          <th>Logo</th>
+          <th>Action</th>
+
+
+
+        </tr>
+      </thead>
+      <tbody >
+        
+        <tr *ngFor="let item of pagedData" [hidden]="item.isHidden">
+          <td (click)="openModal(vehicleModal, item)">{{ item.displayValue }}</td>
+          
+          <td (click)="openModal(vehicleModal, item)"><img [src]="configService.baseUrl +item.makerImage" alt="{{ item.displayValue }}" width="500" height="500"></td>
+          <td>
+        
+            <button class="bn632-hover bn27 " (click)="deleteRow(item)">
+              <ng-container *ngIf="!isDeleting">
+                <i class="bi bi-trash"></i>
+              </ng-container>
+              <ng-container *ngIf="isDeleting">
+                <i class="bi bi-hourglass-split"></i> 
+              </ng-container>
+            </button>
+            
+            
+
+
+        </td>
+        
+
+        </tr>
+      </tbody>
+    </table>
+
+
+
+ 
+
+
+
+
+    <ng-template #vehicleModal let-modal    >
+      <div class="modal-dialog custom-modal">
+
+      <div class="modal-header">
+        <h4 class="modal-title">{{ selectedVehicle?.displayValue }} Details</h4>
+          
+      </div>
+      <div class="modal-body" text-center>
+        <carousel>
+        
+          <slide *ngFor="let image of selectedVehicleImages">
+            <img [src]="configService.baseUrl+image" alt="Vehicle Image" class="img-fluid">
+          </slide>
+         
+        </carousel>
+        
+      </div >
+
+      
+        <p >  vehicleMake: {{ selectedVehicle?.displayValue }}</p>
+        <p>  vehicleModel: {{ selectedVehicle?.model }} </p>
+        <p>  vehicleModelVersion : {{ selectedVehicle?.version }}</p>
+        <p>  performanceAcceleration:{{ selectedVehicle?.performanceAcceleration }}</p>
+        <p>  performanceTopspeed: {{ selectedVehicle?.performanceTopspeed }} </p>
+        <p>  rangeReal :{{ selectedVehicle?.rangeReal }} </p>
+        <p>  efficiencyReal :{{ selectedVehicle?.efficiencyReal  }}</p>
+        <p>  chargePlug :{{ selectedVehicle?.chargePlug }}</p>
+        <p>  chargeStandardPower :{{ selectedVehicle?.chargeStandardPower  }}</p>
+        <p>  chargeStandardPhase : {{ selectedVehicle?.chargeStandardPhase }}</p>
+        <p>  chargeStandardPhaseAmp :{{ selectedVehicle?.chargeStandardPhaseAmp }}</p>
+        <p>  fastChargePlug :{{ selectedVehicle?.fastChargePlug }}</p>
+        <p>  fastChargePowerMax :{{ selectedVehicle?.fastChargePowerMax }}</p>
+        <p>  batteryCapacityFull : {{ selectedVehicle?.batteryCapacityFull }}</p>
+        <p>  rangeWLTP :{{ selectedVehicle?.rangeWLTP }}</p>
+        <p>  id :{{ selectedVehicle?.id }}</p>
+        <p>  canRead : {{ selectedVehicle?.canRead }}</p>
+        </div>
+        
+        
+    </ng-template>
+
+
+
+    <pagination
+      [totalItems]="displayedData.length"
+      [itemsPerPage]="itemsPerPage"
+      [boundaryLinks]="true"
+      [maxSize]="5"
+      [rotate]="true"
+      (pageChanged)="pageChanged($event)">
+    </pagination>
+  
+  
+    
+    
+  
+  
